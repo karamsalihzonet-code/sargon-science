@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root{
+  --bg:#05070b; --panel:#0c1119; --panel2:#111925; --text:#f4f7fb;
+  --muted:#8e9aaa; --line:rgba(255,255,255,.09); --blue:#16b9ff;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 80% 0%,#092238 0,transparent 30%),var(--bg);color:var(--text);font-family:Cairo,Arial,sans-serif}
+a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
+.header{position:sticky;top:0;z-index:10;background:rgba(5,7,11,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}.brand-mark{width:40px;height:40px;border:1px solid #1bbcff;border-radius:12px;display:grid;place-items:center;color:#1bbcff;font-size:24px;box-shadow:0 0 25px rgba(22,185,255,.2)}
+.brand b{display:block;font:700 18px "Space Grotesk";letter-spacing:2px}.brand small{display:block;color:var(--muted);font:600 9px "Space Grotesk";letter-spacing:4px}
+.cart-btn{border:1px solid var(--line);background:var(--panel);color:#fff;border-radius:12px;padding:10px 15px;font-family:inherit;cursor:pointer}.cart-btn span{display:inline-grid;place-items:center;min-width:22px;height:22px;margin-right:6px;border-radius:50%;background:var(--blue);color:#001018;font-weight:800}
+.hero{min-height:520px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:30px}
+.eyebrow{color:var(--blue);font:700 12px "Space Grotesk";letter-spacing:2px}
+h1{font-size:clamp(42px,7vw,78px);line-height:1.08;margin:15px 0}h1 span{color:#fff;text-shadow:0 0 30px rgba(22,185,255,.22)}
+.hero p{color:var(--muted);font-size:18px;max-width:600px;line-height:2}
+.primary-btn,.whatsapp-btn{display:inline-block;border:0;background:var(--blue);color:#001018;font-weight:800;border-radius:12px;padding:13px 22px;font-family:inherit;cursor:pointer}
+.hero-orbit{height:330px;position:relative;display:grid;place-items:center}.orbit{width:270px;height:270px;border:1px solid rgba(22,185,255,.35);border-radius:50%;box-shadow:0 0 80px rgba(22,185,255,.08)}.orbit:after{content:"";position:absolute;width:12px;height:12px;background:var(--blue);border-radius:50%;top:38px;right:85px;box-shadow:0 0 25px var(--blue)}.planet{position:absolute;width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#1b3348,#07101b);border:1px solid rgba(255,255,255,.15);font:700 60px "Space Grotesk";box-shadow:0 0 70px rgba(22,185,255,.15)}
+.books-section{padding:40px 0 100px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}.section-head h2{font-size:32px;margin:6px 0}.book-count{color:var(--muted)}
+.books-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.book{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.2s}.book:hover{transform:translateY(-4px);border-color:rgba(22,185,255,.35)}
+.cover{height:250px;background:radial-gradient(circle at 50% 35%,#1c5370,#0a1018 60%);display:grid;place-items:center;padding:20px;position:relative}.cover:after{content:"SARGON SCIENCE";position:absolute;bottom:12px;left:15px;font:700 9px "Space Grotesk";letter-spacing:2px;color:rgba(255,255,255,.5)}.cover-title{font-weight:800;font-size:24px;text-align:center;line-height:1.5;max-width:85%}.book-info{padding:15px}.book-info h3{font-size:17px;margin:0 0 7px}.book-info p{color:var(--muted);font-size:12px;min-height:38px;margin:0 0 13px}.price{font-weight:800;color:#fff;font-size:16px;margin-bottom:12px}.book-actions{display:flex;gap:8px}.outline,.add-btn{flex:1;border-radius:10px;padding:9px;font-family:inherit;font-weight:700;cursor:pointer}.outline{background:transparent;border:1px solid var(--line);color:#fff}.add-btn{background:var(--blue);border:0;color:#001018}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:20;display:grid;place-items:center;padding:18px}.hidden{display:none}.modal-card{width:min(620px,100%);max-height:90vh;overflow:auto;background:#0a1018;border:1px solid var(--line);border-radius:20px;padding:26px;position:relative}.close{position:absolute;left:18px;top:14px;background:none;border:0;color:#fff;font-size:30px;cursor:pointer}.details-title{font-size:30px;margin:8px 0}.details-desc{color:var(--muted);line-height:2}.details-price{font-size:22px;font-weight:800;margin:20px 0}.cart-card h2{margin-top:8px}.cart-row{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.remove{background:none;border:0;color:#ff7373;cursor:pointer;font-family:inherit}.total{display:flex;justify-content:space-between;font-size:20px;padding:20px 0}.whatsapp-btn{width:100%;background:#25d366;color:#041008}.note{color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:850px){.books-grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr;min-height:auto;padding:70px 0}.hero-orbit{display:none}}
+@media(max-width:520px){.books-grid{grid-template-columns:1fr 1fr;gap:10px}.cover{height:190px}.cover-title{font-size:18px}.book-info{padding:11px}.book-info h3{font-size:14px}.book-info p{font-size:11px}.outline,.add-btn{font-size:11px;padding:8px}.hero p{font-size:15px}h1{font-size:42px}}
