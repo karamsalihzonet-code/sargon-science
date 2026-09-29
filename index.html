@@ -1,69 +1,76 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sargon Science — مكتبة رقمية للكتب والمراجع العلمية.">
-  <title>Sargon Science | مكتبة العلوم</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sargon Science — مكتبة رقمية للكتب والمراجع العلمية.">
+<title>Sargon Science | المكتبة العلمية</title>
+<link rel="icon" href="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">✦</span>
-        <span><b>SARGON</b><small>SCIENCE</small></span>
-      </a>
-      <button class="cart-btn" onclick="openCart()" aria-label="السلة">
-        السلة <span id="cartCount">0</span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero container">
-      <div>
-        <span class="eyebrow">SARGON SCIENCE LIBRARY</span>
-        <h1>اكتشف المعرفة،<br><span>كتابًا بعد كتاب.</span></h1>
-        <p>مكتبة رقمية متخصصة في الفيزياء والفلك والعلوم والمراجع العلمية.</p>
-        <a href="#books" class="primary-btn">تصفح الكتب</a>
-      </div>
-      <div class="hero-orbit" aria-hidden="true">
-        <div class="orbit"></div><div class="planet">S</div>
-      </div>
-    </section>
-
-    <section id="books" class="container books-section">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">LIBRARY</span>
-          <h2>الكتب المتوفرة</h2>
-        </div>
-        <span class="book-count" id="bookCount"></span>
-      </div>
-      <div id="booksGrid" class="books-grid"></div>
-    </section>
-  </main>
-
-  <div id="detailsModal" class="modal hidden">
-    <div class="modal-card">
-      <button class="close" onclick="closeDetails()">×</button>
-      <div id="detailsContent"></div>
-    </div>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#">
+      <img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science">
+      <span><b>SARGON</b><small>SCIENCE</small></span>
+    </a>
+    <button class="cart-btn" onclick="openCart()">السلة <span id="cartCount">0</span></button>
   </div>
+</header>
 
-  <div id="cartModal" class="modal hidden">
-    <div class="modal-card cart-card">
-      <button class="close" onclick="closeCart()">×</button>
-      <span class="eyebrow">YOUR CART</span>
-      <h2>سلة المشتريات</h2>
-      <div id="cartItems"></div>
-      <div class="total"><span>المجموع</span><strong id="cartTotal">0 د.ع</strong></div>
-      <button class="whatsapp-btn" onclick="checkout()">إتمام الطلب عبر WhatsApp</button>
-      <p class="note">سيتم فتح واتساب برسالة جاهزة تحتوي على تفاصيل طلبك.</p>
-    </div>
+<main>
+<section class="hero container">
+  <div class="hero-copy">
+    <span class="eyebrow">SARGON SCIENCE LIBRARY</span>
+    <h1>المعرفة تبدأ<br><span>من كتاب.</span></h1>
+    <p>مكتبة رقمية للفيزياء والفلك والعلوم والمراجع العلمية، مصممة للباحثين والفضوليين ومحبي المعرفة.</p>
+    <a href="#books" class="primary-btn">استكشف الكتب</a>
   </div>
+  <div class="hero-visual">
+    <div class="glow"></div>
+    <img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science logo">
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<section id="books" class="container books-section">
+  <div class="section-head">
+    <div><span class="eyebrow">DIGITAL LIBRARY</span><h2>مكتبة Sargon Science</h2></div>
+    <span class="book-count" id="bookCount"></span>
+  </div>
+  <div class="filters">
+    <button class="filter active" data-filter="all">الكل</button>
+    <button class="filter" data-filter="فلك">فلك</button>
+    <button class="filter" data-filter="فيزياء">فيزياء</button>
+    <button class="filter" data-filter="علوم">علوم</button>
+  </div>
+  <div id="booksGrid" class="books-grid"></div>
+</section>
+</main>
+
+<div id="detailsModal" class="modal hidden">
+  <div class="modal-card">
+    <button class="close" onclick="closeDetails()">×</button>
+    <div id="detailsContent"></div>
+  </div>
+</div>
+
+<div id="cartModal" class="modal hidden">
+  <div class="modal-card cart-card">
+    <button class="close" onclick="closeCart()">×</button>
+    <span class="eyebrow">YOUR CART</span>
+    <h2>سلة المشتريات</h2>
+    <div id="cartItems"></div>
+    <div class="total"><span>المجموع</span><strong id="cartTotal">0 د.ع</strong></div>
+    <button class="whatsapp-btn" onclick="checkout()">إتمام الطلب عبر WhatsApp</button>
+    <p class="note">سيتم فتح واتساب برسالة جاهزة تحتوي على تفاصيل طلبك.</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="">
+  <div><strong>SARGON SCIENCE</strong><p>المعرفة تستحق أن تُكتشف.</p></div>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>
