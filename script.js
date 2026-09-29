@@ -5,38 +5,28 @@ const books=[
 {id:3,title:"الفيزياء الفلكية والميثولوجيا القديمة",price:10000,category:"فلك",desc:"رحلة تجمع بين مفاهيم الفيزياء الفلكية وبعض الأساطير والميثولوجيا القديمة المرتبطة بالسماء.",image:"https://i.ibb.co/LWd5MtD/file-0000000011248243a5cc116ec58ee65b.png"},
 {id:4,title:"دليل المفاعلات النووية",price:10000,category:"علوم",desc:"مرجع تعريفي حول المفاعلات النووية ومبادئ عملها ومفاهيم الطاقة النووية.",image:"https://i.ibb.co/nsqrcBBQ/file-000000005ddc8210b7ede897cc472d55.png"}
 ];
-let cart=JSON.parse(localStorage.getItem("sargonCart")||"[]"),activeFilter="all";
-const money=n=>n.toLocaleString("ar-IQ")+" د.ع";
-function save(){localStorage.setItem("sargonCart",JSON.stringify(cart));updateCartCount()}
-function renderBooks(){
- const list=activeFilter==="all"?books:books.filter(b=>b.category===activeFilter);
- document.getElementById("bookCount").textContent=`${list.length} كتب`;
- document.getElementById("booksGrid").innerHTML=list.map(b=>`
- <article class="book"><div class="cover"><img src="${b.image}" alt="${b.title}" loading="lazy"></div>
- <div class="book-info"><div class="meta">${b.category}</div><h3>${b.title}</h3><p>${b.desc}</p><div class="price">${money(b.price)}</div>
- <div class="book-actions"><button class="outline" onclick="showDetails(${b.id})">التفاصيل</button><button class="add-btn" onclick="addToCart(${b.id})">أضف للسلة</button></div></div></article>`).join("");
-}
-function showDetails(id){
- const b=books.find(x=>x.id===id);
- document.getElementById("detailsContent").innerHTML=`<div class="detail-layout"><img class="detail-cover" src="${b.image}" alt="${b.title}"><div><span class="eyebrow">${b.category}</span><h2 class="details-title">${b.title}</h2><p class="details-desc">${b.desc}</p><div class="details-price">${money(b.price)}</div><button class="primary-btn" onclick="addToCart(${b.id});closeDetails();openCart()">إضافة إلى السلة</button></div></div>`;
- document.getElementById("detailsModal").classList.remove("hidden");
-}
+const CART_KEY="sargonCart", RATINGS_KEY="sargonRatings";
+let cart=loadCart(),ratings=loadRatings(),activeFilter="all";
+const money=n=>Number(n).toLocaleString("ar-IQ")+" د.ع";
+function loadCart(){try{const d=JSON.parse(localStorage.getItem(CART_KEY)||"[]");return [...new Set((Array.isArray(d)?d:[]).map(Number).filter(id=>books.some(b=>b.id===id)))];}catch{return []}}
+function loadRatings(){try{const d=JSON.parse(localStorage.getItem(RATINGS_KEY)||"{}");return d&&typeof d==="object"?d:{};}catch{return {}}}
+function save(){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount()}
+function saveRatings(){localStorage.setItem(RATINGS_KEY,JSON.stringify(ratings))}
+function getRating(id){const r=ratings[id];if(!r||!Number(r.count))return{sum:0,count:0,avg:0};return{sum:Number(r.sum)||0,count:Number(r.count)||0,avg:(Number(r.sum)||0)/(Number(r.count)||1)}}
+function starsHTML(avg=0,interactive=false,id=null){return Array.from({length:5},(_,i)=>interactive?`<button class="star-btn ${i<Math.round(avg)?"filled":""}" onclick="rateBook(${id},${i+1})" aria-label="تقييم ${i+1} من 5">★</button>`:`<span class="star ${i<Math.round(avg)?"filled":""}">★</span>`).join("")}
+function ratingSummary(id,interactive=false){const r=getRating(id);return `<div class="rating-box"><div class="stars">${starsHTML(r.avg,interactive,id)}</div><span class="rating-number">${r.count?r.avg.toFixed(1):"جديد"}</span><span class="rating-count">${r.count?`(${r.count} تقييم)`:"كن أول من يقيّمه"}</span></div>`}
+function rateBook(id,value){if(!books.some(b=>b.id===id)||value<1||value>5)return;const r=getRating(id);ratings[id]={sum:r.sum+value,count:r.count+1};saveRatings();renderBooks();if(!document.getElementById("detailsModal").classList.contains("hidden"))showDetails(id)}
+function renderBooks(){const list=activeFilter==="all"?books:books.filter(b=>b.category===activeFilter);document.getElementById("bookCount").textContent=`${list.length} كتب`;document.getElementById("booksGrid").innerHTML=list.map(b=>`<article class="book"><div class="cover"><img src="${b.image}" alt="${b.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('cover-fallback');this.parentElement.innerHTML='<span>${b.title}</span>'"></div><div class="book-info"><div class="meta">${b.category}</div><h3>${b.title}</h3>${ratingSummary(b.id)}<p>${b.desc}</p><div class="price">${money(b.price)}</div><div class="book-actions"><button class="outline" onclick="showDetails(${b.id})">التفاصيل</button><button class="add-btn" onclick="addToCart(${b.id})">${cart.includes(b.id)?"في السلة ✓":"أضف للسلة"}</button></div></div></article>`).join("")}
+function showDetails(id){const b=books.find(x=>x.id===id);if(!b)return;document.getElementById("detailsContent").innerHTML=`<div class="detail-layout"><img class="detail-cover" src="${b.image}" alt="${b.title}"><div><span class="eyebrow">${b.category}</span><h2 class="details-title">${b.title}</h2>${ratingSummary(id,true)}<p class="details-desc">${b.desc}</p><div class="details-price">${money(b.price)}</div><button class="primary-btn" onclick="addToCart(${b.id});closeDetails();openCart()">إضافة إلى السلة</button><p class="rating-help">اضغط على النجوم لاختيار تقييمك.</p></div></div>`;document.getElementById("detailsModal").classList.remove("hidden")}
 function closeDetails(){document.getElementById("detailsModal").classList.add("hidden")}
-function addToCart(id){if(!cart.includes(id))cart.push(id);save();alert("تمت إضافة الكتاب إلى السلة")}
-function removeFromCart(id){cart=cart.filter(x=>x!==id);save();renderCart()}
-function updateCartCount(){document.getElementById("cartCount").textContent=cart.length}
+function handleModalBackdrop(e,id){if(e.target===document.getElementById(id))document.getElementById(id).classList.add("hidden")}
+function addToCart(id){if(!books.some(b=>b.id===id))return;if(cart.includes(id)){openCart();return}cart.push(id);save();renderBooks();openCart()}
+function removeFromCart(id){cart=cart.filter(x=>Number(x)!==Number(id));save();renderCart();renderBooks()}
+function clearCart(){cart=[];save();renderCart();renderBooks()}
+function updateCartCount(){const e=document.getElementById("cartCount");if(e)e.textContent=cart.length}
 function openCart(){renderCart();document.getElementById("cartModal").classList.remove("hidden")}
 function closeCart(){document.getElementById("cartModal").classList.add("hidden")}
-function renderCart(){
- const items=books.filter(b=>cart.includes(b.id)),box=document.getElementById("cartItems");
- box.innerHTML=items.length?items.map(b=>`<div class="cart-row"><span>${b.title}</span><span>${money(b.price)} <button class="remove" onclick="removeFromCart(${b.id})">حذف</button></span></div>`).join(""):`<p class="note">السلة فارغة حاليًا.</p>`;
- document.getElementById("cartTotal").textContent=money(items.reduce((s,b)=>s+b.price,0));
-}
-function checkout(){
- const items=books.filter(b=>cart.includes(b.id));if(!items.length){alert("أضف كتابًا إلى السلة أولًا.");return}
- const total=items.reduce((s,b)=>s+b.price,0),list=items.map((b,i)=>`${i+1}. ${b.title} — ${money(b.price)}`).join("\n");
- const msg=`مرحبًا Sargon Science، أريد طلب الكتب التالية:\n\n${list}\n\nالمجموع: ${money(total)}\n\nأرجو تزويدي بتفاصيل الدفع والتسليم.`;
- window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank");
-}
+function renderCart(){const items=books.filter(b=>cart.includes(b.id)),box=document.getElementById("cartItems");box.innerHTML=items.length?`<div class="cart-list">${items.map(b=>`<div class="cart-row"><div class="cart-product"><img src="${b.image}" alt=""><div><strong>${b.title}</strong><small>${b.category}</small></div></div><div class="cart-price">${money(b.price)} <button class="remove" onclick="removeFromCart(${b.id})">حذف</button></div></div>`).join("")}</div><button class="clear-cart" onclick="clearCart()">تفريغ السلة</button>`:`<div class="empty-cart"><span>🛒</span><p>السلة فارغة حاليًا.</p><button class="outline" onclick="closeCart();document.getElementById('books').scrollIntoView({behavior:'smooth'})">تصفح الكتب</button></div>`;document.getElementById("cartTotal").textContent=money(items.reduce((s,b)=>s+b.price,0))}
+function checkout(){const items=books.filter(b=>cart.includes(b.id));if(!items.length){alert("أضف كتابًا إلى السلة أولًا.");return}const total=items.reduce((s,b)=>s+b.price,0),list=items.map((b,i)=>`${i+1}. ${b.title} — ${money(b.price)}`).join("\n"),msg=`مرحبًا Sargon Science، أريد طلب الكتب التالية:\n\n${list}\n\nالمجموع: ${money(total)}\n\nأرجو تزويدي بتفاصيل الدفع والتسليم.`;window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank","noopener,noreferrer")}
 document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));btn.classList.add("active");activeFilter=btn.dataset.filter;renderBooks()});
-renderBooks();updateCartCount();
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetails();closeCart()}});renderBooks();updateCartCount();

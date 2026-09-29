@@ -1,76 +1,23 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Sargon Science — مكتبة رقمية للكتب والمراجع العلمية.">
-<title>Sargon Science | المكتبة العلمية</title>
-<link rel="icon" href="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sargon Science — مكتبة رقمية للكتب والمراجع العلمية."><title>Sargon Science | المكتبة العلمية</title>
+<link rel="icon" href="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png"><link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="header">
-  <div class="container nav">
-    <a class="brand" href="#">
-      <img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science">
-      <span><b>SARGON</b><small>SCIENCE</small></span>
-    </a>
-    <button class="cart-btn" onclick="openCart()">السلة <span id="cartCount">0</span></button>
-  </div>
-</header>
-
+<header class="header"><div class="container nav">
+<a class="brand" href="#" aria-label="Sargon Science"><img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science"><span><b>SARGON</b><small>SCIENCE</small></span></a>
+<button class="cart-btn" onclick="openCart()" aria-label="فتح السلة">السلة <span id="cartCount">0</span></button>
+</div></header>
 <main>
-<section class="hero container">
-  <div class="hero-copy">
-    <span class="eyebrow">SARGON SCIENCE LIBRARY</span>
-    <h1>المعرفة تبدأ<br><span>من كتاب.</span></h1>
-    <p>مكتبة رقمية للفيزياء والفلك والعلوم والمراجع العلمية، مصممة للباحثين والفضوليين ومحبي المعرفة.</p>
-    <a href="#books" class="primary-btn">استكشف الكتب</a>
-  </div>
-  <div class="hero-visual">
-    <div class="glow"></div>
-    <img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science logo">
-  </div>
-</section>
-
-<section id="books" class="container books-section">
-  <div class="section-head">
-    <div><span class="eyebrow">DIGITAL LIBRARY</span><h2>مكتبة Sargon Science</h2></div>
-    <span class="book-count" id="bookCount"></span>
-  </div>
-  <div class="filters">
-    <button class="filter active" data-filter="all">الكل</button>
-    <button class="filter" data-filter="فلك">فلك</button>
-    <button class="filter" data-filter="فيزياء">فيزياء</button>
-    <button class="filter" data-filter="علوم">علوم</button>
-  </div>
-  <div id="booksGrid" class="books-grid"></div>
-</section>
+<section class="hero container"><div class="hero-copy"><span class="eyebrow">SARGON SCIENCE LIBRARY</span><h1>المعرفة تبدأ<br><span>من كتاب.</span></h1><p>مكتبة رقمية للفيزياء والفلك والعلوم والمراجع العلمية، مصممة للباحثين والفضوليين ومحبي المعرفة.</p><a href="#books" class="primary-btn">استكشف الكتب</a></div><div class="hero-visual"><div class="glow"></div><img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science logo"></div></section>
+<section id="books" class="container books-section"><div class="section-head"><div><span class="eyebrow">DIGITAL LIBRARY</span><h2>مكتبة Sargon Science</h2></div><span class="book-count" id="bookCount"></span></div>
+<div class="filters"><button class="filter active" data-filter="all">الكل</button><button class="filter" data-filter="فلك">فلك</button><button class="filter" data-filter="فيزياء">فيزياء</button><button class="filter" data-filter="علوم">علوم</button></div><div id="booksGrid" class="books-grid"></div></section>
 </main>
-
-<div id="detailsModal" class="modal hidden">
-  <div class="modal-card">
-    <button class="close" onclick="closeDetails()">×</button>
-    <div id="detailsContent"></div>
-  </div>
-</div>
-
-<div id="cartModal" class="modal hidden">
-  <div class="modal-card cart-card">
-    <button class="close" onclick="closeCart()">×</button>
-    <span class="eyebrow">YOUR CART</span>
-    <h2>سلة المشتريات</h2>
-    <div id="cartItems"></div>
-    <div class="total"><span>المجموع</span><strong id="cartTotal">0 د.ع</strong></div>
-    <button class="whatsapp-btn" onclick="checkout()">إتمام الطلب عبر WhatsApp</button>
-    <p class="note">سيتم فتح واتساب برسالة جاهزة تحتوي على تفاصيل طلبك.</p>
-  </div>
-</div>
-
-<footer class="footer">
-  <img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="">
-  <div><strong>SARGON SCIENCE</strong><p>المعرفة تستحق أن تُكتشف.</p></div>
-</footer>
-<script src="script.js"></script>
-</body>
-</html>
+<div id="detailsModal" class="modal hidden" onclick="handleModalBackdrop(event,'detailsModal')"><div class="modal-card"><button class="close" onclick="closeDetails()" aria-label="إغلاق">×</button><div id="detailsContent"></div></div></div>
+<div id="cartModal" class="modal hidden" onclick="handleModalBackdrop(event,'cartModal')"><div class="modal-card cart-card"><button class="close" onclick="closeCart()" aria-label="إغلاق">×</button><span class="eyebrow">YOUR CART</span><h2>سلة المشتريات</h2><div id="cartItems"></div><div class="total"><span>المجموع</span><strong id="cartTotal">0 د.ع</strong></div><button class="whatsapp-btn" onclick="checkout()">إتمام الطلب عبر WhatsApp</button><p class="note">سيتم فتح واتساب برسالة جاهزة تحتوي على تفاصيل طلبك.</p></div></div>
+<footer class="footer"><div class="footer-brand"><img src="https://i.ibb.co/9RnMSSz/Blue-White-Minimalist-Streetwear-Logo-20260928-003100-0000.png" alt="Sargon Science"><div><strong>SARGON SCIENCE</strong><p>المعرفة تستحق أن تُكتشف.</p></div></div><div class="social-links" aria-label="روابط التواصل">
+<a class="social telegram" href="https://t.me/sargoniq" target="_blank" rel="noopener noreferrer" aria-label="قناة Sargon Science على تيليگرام" title="تيليگرام"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 3.6 18.1 20c-.25 1.16-.9 1.45-1.82.9l-5.02-3.7-2.42 2.33c-.27.27-.5.5-1.02.5l.36-5.1 9.28-8.38c.4-.36-.09-.56-.62-.2L5.38 13.4.42 11.85c-1.08-.34-1.1-1.08.23-1.58L20.03 2.9c.89-.33 1.67.2 1.37.7Z"/></svg></a>
+<a class="social whatsapp" href="https://wa.me/9647876832447" target="_blank" rel="noopener noreferrer" aria-label="التواصل عبر واتساب" title="واتساب"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.55 0 .24 5.3.24 11.83c0 2.09.55 4.13 1.6 5.92L.14 24l6.4-1.68a11.85 11.85 0 0 0 5.54 1.38h.01c6.52 0 11.83-5.31 11.83-11.84 0-3.16-1.23-6.13-3.42-8.36Zm-8.42 18.1h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.8 1 1.02-3.7-.24-.38a9.82 9.82 0 1 1 8.4 4.66Zm5.39-7.37c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.65.15-.19.29-.75.95-.92 1.14-.17.19-.34.22-.63.07-.29-.15-1.21-.45-2.31-1.43-.85-.76-1.43-1.69-1.6-1.98-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.65-1.56-.89-2.14-.23-.56-.47-.49-.65-.5h-.55c-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.43s1.04 2.82 1.19 3.01c.15.19 2.04 3.11 4.94 4.36.69.3 1.23.48 1.65.61.69.22 1.31.19 1.8.12.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.19-.56-.34Z"/></svg></a>
+</div></footer><script src="script.js"></script></body></html>
